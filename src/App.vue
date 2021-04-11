@@ -1,28 +1,76 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      light
+      class="pr-10 pl-10"
+      height="100"
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="MOVA Logo"
+          class="shrink mr-2"
+          contain
+          src="./assets/MOVA.svg"
+          transition="scale-transition"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn id="button-return"
+        target="_blank"
+        outlined
+        tile
+      >
+        <v-icon>mdi-keyboard-return</v-icon>
+        <span class="mr font-weight-regular ml-5" v-show="showTextAppBar">Voltar</span>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <v-container>
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+
+  data: () => ({
+    showTextAppBar: true,
+  }),
+
+  mounted() {
+    window.addEventListener('load', () => {
+      screen.availWidth < 768 ? this.showTextAppBar = false : this.showTextAppBar = true
+      window.addEventListener('resize', () => {
+        screen.availWidth < 768 ? this.showTextAppBar = false : this.showTextAppBar = true
+      })
+    })
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped lang='scss'>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap');
+  @import './assets/scss/breakpoints.scss';
+
+  $purple-default: #6D2080;
+
+  * {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  #button-return {
+    color: $purple-default;
+    @include breakpoint(smallOnly) {
+      border: none;
+    }
+  }
+
 </style>
