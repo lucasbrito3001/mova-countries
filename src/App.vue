@@ -58,6 +58,7 @@ export default {
 
 <style scoped lang='scss'>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap');
+  @import './assets/scss/breakpoints.scss';
 
   $purple-default: #6D2080;
 
@@ -67,8 +68,9 @@ export default {
 
   #button-return {
     color: $purple-default;
-    height: 36px;
-    width: 134px;
+    @include breakpoint(smallOnly) {
+      border: none;
+    }
   }
 
 </style>

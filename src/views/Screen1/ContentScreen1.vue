@@ -1,37 +1,39 @@
 <template>
-    <div>
-        <Selects :props-type-filter-select='sendTypeFilterSelect'/>
-    </div>
+    <main>
+        <section>
+            <Selects :props-type-filter-select='sendTypeFilterSelect' @filtered-flags='prepareFlagsArray'/>
+        </section>
+
+        <section>
+            <Flags :props-filtered-flags='sendFlags'/>
+        </section>
+    </main>
 </template>
 
 <script>
 
 import Selects from '../../components/SelectsComponents/ContentSelects'
+import Flags from '../../components/FlagsComponents/ContentFlags'
 
 export default {
     name: 'FirstScreen',
 
     components: {
-        Selects
+        Selects,
+        Flags
     },
 
     data() {
         return {
             sendTypeFilterSelect: [
-                'Região',
-                'Capital',
-                'Língua',
-                'Pais',
-                'Código de Ligação'
+                {selectedFilter: 'Região', value: 'region'},
+                {selectedFilter: 'Capital', value: 'capital'},
+                {selectedFilter: 'Língua', value: 'lang'},
+                {selectedFilter: 'Pais', value: 'name'},
+                {selectedFilter: 'Código de Ligação', value: 'callingcode'}
             ],
-            
-            sendValueSelect: [
-                'region',
-                'capital',
-                'lang',
-                'name',
-                'callingcode'
-            ]
+
+            sendFlags: []
         }
     }
 }

@@ -1,6 +1,12 @@
+@import '../../assets/scss/breakpoints.scss';
+
 #button-search {
     border-radius: 10px;
     color: white;
     background-color: #6D2080;
     font-size: 14px;
+
+    @include breakpoint(mediumOnly) {
+        display: block;
+    }
 }
