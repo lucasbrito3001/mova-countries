@@ -73,7 +73,6 @@ export default {
 
       const res = await this.axios.get('https://restcountries.eu/rest/v2/all?fields=region;languages;capital;callingCodes;name')
       const data = await res.data
-      console.log(data)
       
       this.prepareSelects(data)
 
@@ -86,6 +85,7 @@ export default {
 
   methods: {
     async sendRequestGET() {
+      this.filteredFlags = []
       try {
         const res = await this.axios.get(`https://restcountries.eu/rest/v2/${this.firstReturnedObject.value}/${this.secondReturnedObject.value}`)
         
@@ -95,6 +95,12 @@ export default {
         console.log(this.filteredFlags)
 
         this.$emit('filtered-flags',this.filteredFlags)
+  
+        const lengthFlagsArray = this.filteredFlags.length
+        console.log(lengthFlagsArray)
+        lengthFlagsArray < 12
+        ? this.$emit('length-flags-array', 1)
+        : this.$emit('length-flags-array',lengthFlagsArray / 12)
 
       } catch (error) {
         console.error(error)

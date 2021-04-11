@@ -1,11 +1,11 @@
 <template>
     <main>
         <section>
-            <Selects :props-type-filter-select='sendTypeFilterSelect' @filtered-flags='prepareFlagsArray'/>
+            <Selects :props-type-filter-select='sendTypeFilterSelect' @filtered-flags='prepareFlagsArray' @length-flags-array="(element) => paginationLength = element"/>
         </section>
 
         <section>
-            <Flags :props-filtered-flags='sendFlags'/>
+            <Flags :props-filtered-flags='sendFlags' v-if="showFlags" :props-pagination-length='paginationLength'/>
         </section>
     </main>
 </template>
@@ -33,11 +33,22 @@ export default {
                 {selectedFilter: 'Código de Ligação', value: 'callingcode'}
             ],
 
-            sendFlags: []
+            sendFlags: [],
+
+            paginationLength: '',
+
+            showFlags: false
+        }
+    },
+
+    methods: {
+        prepareFlagsArray(flags) {
+            this.showFlags = false
+            this.sendFlags = flags
+            this.showFlags = true
         }
     }
 }
-
-        Selects</script>
+</script>
 
 <style lang='scss' src='./styleScreen1.scss' scoped/>
