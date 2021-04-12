@@ -89,15 +89,12 @@ export default {
       try {
         const res = await this.axios.get(`https://restcountries.eu/rest/v2/${this.firstReturnedObject.value}/${this.secondReturnedObject.value}`)
         
-        const data = res.data
-
-        data.forEach((element) => this.filteredFlags.push(element.flag))
-        console.log(this.filteredFlags)
+        const data = await res.data
+        data.forEach((element) => this.filteredFlags.push({flag: element.flag, nameReq: element.name.toLowerCase()}))
 
         this.$emit('filtered-flags',this.filteredFlags)
   
         const lengthFlagsArray = this.filteredFlags.length
-        console.log(lengthFlagsArray)
         lengthFlagsArray < 12
         ? this.$emit('length-flags-array', 1)
         : this.$emit('length-flags-array',lengthFlagsArray / 12)
@@ -146,7 +143,6 @@ export default {
 
         
       })
-      console.log(this.objectWithObjectsPrepared)
     },
 
     prepareRequest() {

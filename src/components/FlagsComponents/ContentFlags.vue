@@ -1,6 +1,6 @@
 <template>
   <v-row>
-      <v-col v-for="(flag,index) in propsFilteredFlags" :key="index"
+      <v-col v-for="(renderFlag,index) in propsFilteredFlags" :key="index"
         cols="12" xs="12" sm="6" md="4"
       >
         <div class="d-flex align-center">
@@ -8,9 +8,9 @@
             alt="flags-images"
             class="shrink flags-size"
             contain
-            :src="flag"
+            :src="renderFlag.flag"
             transition="scale-transition"
-            @click="this.$emit()"
+            @click="emitFlagClicked(renderFlag.nameReq)"
             />
       </div>
       </v-col>
@@ -27,6 +27,8 @@
 
 <script>
 export default {
+    name: 'ContentFlags',
+    
     props: {
         propsFilteredFlags: {
             type: Array
@@ -40,6 +42,12 @@ export default {
     data() {
         return {
             paginationInfos: '',
+        }
+    },
+
+    methods: {
+        emitFlagClicked(nameReq) {
+            this.$emit('click-flags',nameReq)
         }
     }
 }

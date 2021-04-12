@@ -19,9 +19,9 @@
       <v-spacer></v-spacer>
 
       <v-btn id="button-return"
-        target="_blank"
         outlined
         tile
+        href="/"
       >
         <v-icon>mdi-keyboard-return</v-icon>
         <span class="mr font-weight-regular ml-5" v-show="showTextAppBar">Voltar</span>
